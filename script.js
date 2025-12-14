@@ -2,58 +2,74 @@
 function getPersonalizedGreeting(name) {
     const nameLower = name.toLowerCase().trim();
     
+    // Formal pronouns (for elders, sir)
+    const formal = {
+        greeting: '',
+        acho: 'আছেন',
+        tomake: 'আপনাকে',
+        tomar: 'আপনার',
+        asbe: 'আসবেন'
+    };
+    
+    // Informal pronouns (for friends, siblings)
+    const informal = {
+        greeting: '',
+        acho: 'আছো',
+        tomake: 'তোমাকে',
+        tomar: 'তোমার',
+        asbe: 'আসবে'
+    };
+    
     // Check for specific names using substring matching
-    if ( nameLower.includes('noim') ||  nameLower.includes('shamim') || nameLower.includes('rakib') || nameLower.includes('romim')) {
-        return `প্রিয় ভাই,`;
+    if (nameLower.includes('romim')) {
+        informal.greeting = `প্রিয় ভাই,`;
+        return informal;
     } 
-    else if (nameLower.includes('মৌ') || nameLower.includes('mou')) {
-        return `প্রিয় মৌ আন্টি ,`;
+    else if (nameLower.includes('noim')  || nameLower.includes('শামীম') || nameLower.includes('shamim')  || nameLower.includes('rakib')  || nameLower.includes('রাকিব')) {
+        formal.greeting = `প্রিয় ভাই,`;
+        return formal;
     }
-    else if (nameLower.includes('ইউসুফ') || nameLower.includes('yousuf') || nameLower.includes('sazib') || nameLower.includes('সজীব') || nameLower.includes('জুয়েল') || nameLower.includes('juwel') || nameLower.includes('sony') || nameLower.includes('সনি') || nameLower.includes('নীল') || nameLower.includes('neel') || nameLower.includes('bulbul') || nameLower.includes('বুলবুল')) {
-        return `প্রিয় মামা,`;
+    else if (nameLower.includes('mou') || nameLower.includes('মৌ')) {
+        informal.greeting = `প্রিয় মৌ আন্টি,`;
+        return informal;
+    } 
+    else if (nameLower.includes('ইউসুফ') || nameLower.includes('yousuf') || nameLower.includes('sazib') || nameLower.includes('সজীব') || nameLower.includes('জুয়েল') || nameLower.includes('juwel') || nameLower.includes('sony') || nameLower.includes('সনি') || nameLower.includes('নীল') || nameLower.includes('neel') || nameLower.includes('bulbul') || nameLower.includes('বুলবুল')) {
+        formal.greeting = `প্রিয় মামা,`;
+        return informal;
     }
-    else if (nameLower.includes('ছোঁয়া') || nameLower.includes('ছোয়া') || nameLower.includes('soya')) {
-        return `প্রিয় বোন,`;
+    else if (nameLower.includes('নীল') || nameLower.includes('neel')) {
+        formal.greeting = `প্রিয় মামা,`;
+        return formal;
     }
-    else if (nameLower.includes('আতাউল্লাহ') || nameLower.includes('ataull')) {
-        return `প্রিয় স্যার,`;
+    else if (nameLower.includes('ছোঁয়া') || nameLower.includes('ছোয়া') || nameLower.includes('soya') || nameLower.includes('choa')) {
+        informal.greeting = `প্রিয় বোন,`;
+        return informal;
     }
-    // else if (nameLower.includes('ফারহান') || nameLower.includes('farhan')) {
-    //     return `প্রিয় ফারহান,`;
-    // }
-    // else if (nameLower.includes('তাহসিন') || nameLower.includes('tahsin')) {
-    //     return `প্রিয় তাহসিন,`;
-    // }
-    // else if (nameLower.includes('রাফি') || nameLower.includes('rafi')) {
-    //     return `প্রিয় রাফি,`;
-    // }
-    // else if (nameLower.includes('সাদিক') || nameLower.includes('sadiq')) {
-    //     return `প্রিয় সাদিক,`;
-    // }
-    // else if (nameLower.includes('ইমরান') || nameLower.includes('imran')) {
-    //     return `প্রিয় ইমরান,`;
-    // }
-    // Check if name ends with common Bengali name patterns
-    // else if (nameLower.endsWith('উল') || nameLower.endsWith('ul')) {
-    //     return `প্রিয় ${name},`;
-    // }
-    // else if (nameLower.endsWith('আহ') || nameLower.endsWith('ah')) {
-    //     return `প্রিয় ${name},`;
-    // }
+    else if (nameLower.includes('আতাউল্লাহ') || nameLower.includes('ataull') || nameLower.includes('ফাহিম') || nameLower.includes('fahim')) {
+        formal.greeting = `প্রিয় স্যার,`;
+        return formal;
+    }
     // Default greeting for any other name
     else {
-        return `প্রিয় ${name},`;
+        informal.greeting = `প্রিয় ${name},`;
+        return informal;
     }
 }
 
 
 // Function to show invitation with personalized greeting
 function showInvitation(nickname) {
-    // Generate personalized greeting
-    const greeting = getPersonalizedGreeting(nickname);
+    // Generate personalized greeting and pronouns
+    const data = getPersonalizedGreeting(nickname);
     
     // Display the greeting in the invitation
-    document.getElementById('greeting').textContent = greeting;
+    document.getElementById('greeting').textContent = data.greeting;
+    
+    // Update pronouns throughout the letter
+    document.getElementById('acho').textContent = data.acho;
+    document.getElementById('tomake').textContent = data.tomake;
+    document.getElementById('tomar').textContent = data.tomar;
+    document.getElementById('asbe').textContent = data.asbe;
     
     // Hide input form and show invitation with animation
     document.getElementById('inputContainer').style.display = 'none';
