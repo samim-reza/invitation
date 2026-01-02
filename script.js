@@ -33,8 +33,8 @@ function getPersonalizedGreeting(name) {
         informal.greeting = `প্রিয় মৌ আন্টি,`;
         return informal;
     } 
-    else if (nameLower.includes('ইউসুফ') || nameLower.includes('yousuf') || nameLower.includes('sazib') || nameLower.includes('সজীব') || nameLower.includes('জুয়েল') || nameLower.includes('juwel') || nameLower.includes('sony') || nameLower.includes('সনি') || nameLower.includes('নীল') || nameLower.includes('neel') || nameLower.includes('bulbul') || nameLower.includes('বুলবুল')) {
-        formal.greeting = `প্রিয় মামা,`;
+    else if (nameLower.includes('ইউসুফ') || nameLower.includes('yousuf') || nameLower.includes('sazib') || nameLower.includes('সজীব') || nameLower.includes('জুয়েল') || nameLower.includes('juwel') || nameLower.includes('sony') || nameLower.includes('সনি') || nameLower.includes('bulbul') || nameLower.includes('বুলবুল')) {
+        informal.greeting = `প্রিয় মামা,`;
         return informal;
     }
     else if (nameLower.includes('নীল') || nameLower.includes('neel')) {
