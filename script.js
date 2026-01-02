@@ -21,15 +21,19 @@ function getPersonalizedGreeting(name) {
     };
     
     // Check for specific names using substring matching
-    if (nameLower.includes('romim')) {
+    if (nameLower.includes('romim') || nameLower.includes('রমিম')) {
         informal.greeting = `প্রিয় ভাই,`;
+        return informal;
+    } 
+    else if (nameLower.includes('ইলা') || nameLower.includes('ela')) {
+        informal.greeting = `প্রিয় ভাবি,`;
         return informal;
     } 
     else if (nameLower.includes('noim')  || nameLower.includes('শামীম') || nameLower.includes('shamim')  || nameLower.includes('rakib')  || nameLower.includes('রাকিব')) {
         formal.greeting = `প্রিয় ভাই,`;
         return formal;
     }
-    else if (nameLower.includes('mou') || nameLower.includes('মৌ')) {
+    else if (nameLower.includes('mou') || nameLower.includes('মৌ') || nameLower.includes('maria') || nameLower.includes('মারিয়া')) {
         informal.greeting = `প্রিয় মৌ আন্টি,`;
         return informal;
     } 
