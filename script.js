@@ -1,3 +1,24 @@
+// List of all invited names
+const invitedNames = [
+    'romim', 'রমিম',
+    'ela', 'ইলা',
+    'noim', 'shamim', 'শামীম', 'rakib', 'রাকিব',
+    'mou', 'মৌ', 'maria', 'মারিয়া',
+    'yousuf', 'ইউসুফ', 'sazib', 'সজীব', 'juwel', 'jewel', 'জুয়েল', 'sony', 'সনি', 'bulbul', 'বুলবুল',
+    'neel', 'নীল',
+    'soya', 'choa', 'ছোঁয়া', 'ছোয়া',
+    'ataull', 'আতাউল্লাহ', 'fahim', 'ফাহিম',
+    'tahsin', 'তাহসিন', 'rumman', 'রুম্মান', 'sifat', 'সিফাত',
+    'razeen', 'রাজীন', 'rameen', 'রামীন', 'galib', 'গালিব',
+    'arafat', 'আরাফাত', 'nahian', 'নাহিয়ান', 'reza', 'রেজা',
+    'nurul', 'নুরুল', 'zahin', 'জাহিন', 'jubayer', 'জুবায়ের',
+    'sarwar', 'সারওয়ার', 'rahim', 'রহিম', 'mursalin', 'মুরসালিন',
+    'tanveer', 'তানভীর', 'apurba', 'অপূর্ব', 'nayeem', 'নাঈম',
+    'sadib', 'সাদিব', 'noyon', 'নয়ন', 'pranto', 'প্রান্ত',
+    'raib', 'রায়েব', 'suaeb', 'সুয়েব', 'asif', 'আসিফ',
+    'umme ruman', 'উম্মে রুমান'
+];
+
 // Function to get personalized greeting based on name
 function getPersonalizedGreeting(name) {
     const nameLower = name.toLowerCase().trim();
@@ -51,6 +72,10 @@ function getPersonalizedGreeting(name) {
     }
     else if (nameLower.includes('আতাউল্লাহ') || nameLower.includes('ataull') || nameLower.includes('ফাহিম') || nameLower.includes('fahim')) {
         formal.greeting = `প্রিয় স্যার,`;
+        return formal;
+    }
+    else if (nameLower.includes('umme ruman') || nameLower.includes('উম্মে') || nameLower.includes('ruman') || nameLower.includes('রুমান')) {
+        formal.greeting = `প্রিয় ম্যাম,`;
         return formal;
     }
     // Friends list
@@ -140,6 +165,60 @@ function handleSubmit() {
 window.addEventListener('load', function() {
     const submitBtn = document.getElementById('submitBtn');
     const input = document.getElementById('nicknameInput');
+    const suggestionsBox = document.getElementById('suggestions');
+    
+    // Function to show suggestions
+    function showSuggestions(value) {
+        const inputValue = value.toLowerCase().trim();
+        
+        if (inputValue === '') {
+            suggestionsBox.innerHTML = '';
+            suggestionsBox.style.display = 'none';
+            return;
+        }
+        
+        // Filter names that match the input
+        const matches = invitedNames.filter(name => 
+            name.toLowerCase().includes(inputValue)
+        );
+        
+        // Remove duplicates and limit to 8 suggestions
+        const uniqueMatches = [...new Set(matches)].slice(0, 8);
+        
+        if (uniqueMatches.length > 0) {
+            suggestionsBox.innerHTML = uniqueMatches
+                .map(name => `<div class="suggestion-item">${name}</div>`)
+                .join('');
+            suggestionsBox.style.display = 'block';
+        } else {
+            suggestionsBox.innerHTML = '';
+            suggestionsBox.style.display = 'none';
+        }
+    }
+    
+    // Handle input changes
+    input.addEventListener('input', function() {
+        document.getElementById('errorMessage').style.display = 'none';
+        input.classList.remove('error');
+        showSuggestions(this.value);
+    });
+    
+    // Handle clicking on a suggestion
+    suggestionsBox.addEventListener('click', function(e) {
+        if (e.target.classList.contains('suggestion-item')) {
+            input.value = e.target.textContent;
+            suggestionsBox.innerHTML = '';
+            suggestionsBox.style.display = 'none';
+            input.focus();
+        }
+    });
+    
+    // Hide suggestions when clicking outside
+    document.addEventListener('click', function(e) {
+        if (e.target !== input && e.target.parentElement !== suggestionsBox) {
+            suggestionsBox.style.display = 'none';
+        }
+    });
     
     // Handle button click
     submitBtn.addEventListener('click', handleSubmit);
@@ -149,12 +228,6 @@ window.addEventListener('load', function() {
         if (e.key === 'Enter') {
             handleSubmit();
         }
-    });
-    
-    // Hide error message when user starts typing
-    input.addEventListener('input', function() {
-        document.getElementById('errorMessage').style.display = 'none';
-        input.classList.remove('error');
     });
     
     // Focus on input

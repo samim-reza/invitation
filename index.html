@@ -13,7 +13,10 @@
             <h2>আসসালামু আলাইকুম</h2>
             <p class="input-subtitle">Please enter your nickname</p>
             <div class="input-group">
-                <input type="text" id="nicknameInput" placeholder="আপনার নিকনেম লিখুন..." autocomplete="off">
+                <div class="input-wrapper">
+                    <input type="text" id="nicknameInput" placeholder="আপনার নিকনেম লিখুন..." autocomplete="off">
+                    <div class="suggestions" id="suggestions"></div>
+                </div>
                 <button id="submitBtn">Next →</button>
             </div>
             <p class="error-message" id="errorMessage">Please enter your nickname</p>
