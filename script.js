@@ -53,10 +53,37 @@ function getPersonalizedGreeting(name) {
         formal.greeting = `প্রিয় স্যার,`;
         return formal;
     }
-    // Default greeting for any other name
-    else {
-        informal.greeting = `প্রিয় ${name},`;
+    // Friends list
+    else if (nameLower.includes('tahsin') || nameLower.includes('তাহসিন') || 
+             nameLower.includes('rumman') || nameLower.includes('রুম্মান') || 
+             nameLower.includes('sifat') || nameLower.includes('সিফাত') || 
+             nameLower.includes('razeen') || nameLower.includes('রাজীন') || 
+             nameLower.includes('rameen') || nameLower.includes('রামীন') || 
+             nameLower.includes('galib') || nameLower.includes('গালিব') || 
+             nameLower.includes('arafat') || nameLower.includes('আরাফাত') || 
+             nameLower.includes('nahian') || nameLower.includes('নাহিয়ান') || 
+             nameLower.includes('reza') || nameLower.includes('রেজা') || 
+             nameLower.includes('nurul') || nameLower.includes('নুরুল') || 
+             nameLower.includes('zahin') || nameLower.includes('জাহিন') || 
+             nameLower.includes('jubayer') || nameLower.includes('জুবায়ের') || 
+             nameLower.includes('sarwar') || nameLower.includes('সারওয়ার') || 
+             nameLower.includes('rahim') || nameLower.includes('রহিম') || 
+             nameLower.includes('mursalin') || nameLower.includes('মুরসালিন') || 
+             nameLower.includes('tanveer') || nameLower.includes('তানভীর') || 
+             nameLower.includes('apurba') || nameLower.includes('অপূর্ব') || 
+             nameLower.includes('nayeem') || nameLower.includes('নাঈম') || 
+             nameLower.includes('sadib') || nameLower.includes('সাদিব') || 
+             nameLower.includes('noyon') || nameLower.includes('নয়ন') || 
+             nameLower.includes('pranto') || nameLower.includes('প্রান্ত') || 
+             nameLower.includes('rakib') || nameLower.includes('রাকিব') || 
+             nameLower.includes('suaeb') || nameLower.includes('সুয়েব') || 
+             nameLower.includes('asif') || nameLower.includes('আসিফ')) {
+        informal.greeting = `প্রিয় বন্ধু,`;
         return informal;
+    }
+    // Not invited
+    else {
+        return null;
     }
 }
 
@@ -65,6 +92,15 @@ function getPersonalizedGreeting(name) {
 function showInvitation(nickname) {
     // Generate personalized greeting and pronouns
     const data = getPersonalizedGreeting(nickname);
+    
+    // Check if person is not in invitation list
+    if (data === null) {
+        const errorMessage = document.getElementById('errorMessage');
+        errorMessage.textContent = 'দুঃখিত, আপনি আমন্ত্রণ তালিকায় নেই। (Sorry, you are not in the invitation list.)';
+        errorMessage.style.display = 'block';
+        document.getElementById('nicknameInput').classList.add('error');
+        return;
+    }
     
     // Display the greeting in the invitation
     document.getElementById('greeting').textContent = data.greeting;
