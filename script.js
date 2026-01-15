@@ -62,7 +62,7 @@ function getPersonalizedGreeting(name) {
              nameLower.includes('galib') || nameLower.includes('গালিব') || 
              nameLower.includes('arafat') || nameLower.includes('আরাফাত') || 
              nameLower.includes('nahian') || nameLower.includes('নাহিয়ান') || 
-             nameLower.includes('reza') || nameLower.includes('রেজা') || 
+             nameLower.includes('reza') || nameLower.includes('রেজা') || nameLower.includes('reja') ||
              nameLower.includes('nurul') || nameLower.includes('নুরুল') || 
              nameLower.includes('zahin') || nameLower.includes('জাহিন') || 
              nameLower.includes('jubayer') || nameLower.includes('জুবায়ের') || 
